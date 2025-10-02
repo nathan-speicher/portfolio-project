@@ -1,8 +1,8 @@
 # Portfolio Part 1: Component Brainstorming
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) then delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) then delete this comment -->
-- **Due Date**: <!-- TODO: fill with due date and time (e.g., 10/17 @ 3:10 PM EST) then delete this comment -->
+- **Name**: Nathan Speicher
+- **Dot Number**: speicher.51
+- **Due Date**: 9/19 @ 4:10
 
 ## Assignment Overview
 
@@ -122,7 +122,6 @@ that may help you in your brainstorming. All of these components were made at
 some point by one of your peers, so you should feel confident that you can
 accomplish any of them.
 
-<!-- TODO: browse the list of possible projects then delete this comment -->
 
 There is no requirement that you use any of the components listed above.
 If you want to model something else, go for it! Very common early object
@@ -131,8 +130,6 @@ etc. Make of this whatever seems interesting to you, and keep in mind that
 you're just brainstorming right now. You do not have to commit to anything.
 
 ### Example Component
-
-<!-- TODO: review this example component then delete this comment -->
 
 To help you brainstorm a few components, we've provided an example below of a
 component you already know well: NaturalNumber. We highly recommend that you
@@ -200,68 +197,90 @@ will likely refine your design to make your implementation easier to use.
 
 > Please use this section to share your designs.
 
-- Component Design #1: <!-- TODO: give component a name then delete this comment -->
+- Component Design #1: roulettePool
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    A randomized "pool" of values that in order to add, remove elemnts from (or otherwise manipulate the list), you call a roll() function.
+    The kernel is intentionally very restrictive.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - void load(String value): Adds the given value to the pool at a random position
+    - String roll(): Randomly selects and removes a value from the pool
+    boolean isEmpty(): returns whether or not the pool is empty.
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - void reload(List<T> vals): clears the pool, and adds a new batch of values
+    - int size(): returns the number of items in the pool
+    - List<T> previewAll(): returns a copy of all items in the pool without removing any of the values.
+    - void shuffle(): shuffles the elements in the pool
+    - List<T x> peekRoll(int n): Returns a list of random values that could be rolled next.
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes. roll() mutates the pool by removing and element, load() adds elements.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - I don't know.
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Possibly. This can be expanded to include different roll types, so enums could be usefull in that case.
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - reload() can be implemented by calling roll() until the pool is empty, then calling load() for each new value.
+      - size() can be implemented by rolling all values into a separate structure, then taking the size of that structure, then loading all values back in.
 
-- Component Design #2: <!-- TODO: give component a name then delete this comment -->
+- Component Design #2: text line
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - This models a line of text using a sequence of characters that can be edited. The line is edited by manipulating the character values one at a time.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - void append(char c): Appends a character 'c' to the end of the text line
+    - char removeLast(): removes the last character of the text line and returns it
+    - boolean isEmpty(): returns whether or not the text line is empty
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - void insert(int position, String s): Inserts a String s starting at the given int position
+    - void delete(int position, int count): Deletes the amount of characters given in count starting from position
+    - void replace(int position, char c):
+    replaces the character at the given position with the given character c.
+    - int length(): Returns the number of characters in the text line
+    - String toString(): Returns the line of text as a String
+    - void clear(): clears all characters from the text line
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, it has to be, becuase users must be able to add, remove and replace characters
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - It could use Queues or Stacks for some data storage
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - I don't know.
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes. for the insert method, it would repeatedly use removeLast to remove the last char in the string, and store them. Then, it would append the given String s, then append the rest of the text line to the end
 
-- Component Design #3: <!-- TODO: give component a name then delete this comment -->
+- Component Design #3: boolBoard
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - A two-dimensional matrix of boolean values, could be used to represent things like pixel data or game board states. The kernel gives methods to access and modify cells, and secondary methods would allow for more complex methods.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - boolean get(int row, int col): just returns the value at the given row and column
+    - void set(int row, int col, boolean val): Sets the value at the specified row and column with the given boolean value
+    - int getRowCount(): returns the amount of rows in the matrix
+    - int getColCount(): returns the amount of colums in the matrix
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - void clear(): sets all values to false
+    - void toggle(int row, int col): switches the value at the given position (false becomes true, true becomes false)
+    - int countTrue(): Returns the number of true values in the matrix
+    - void fill(int startRow, int startCol, int endRow, int endCol, boolean val): sets all value withing the given region to the given boolean value
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - yep. needs to be mutable to allow switching up values
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - No. the data is stored in a primitive two dimensional array
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - No, booleans are pretty straight forward
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yeah. clear() can be implemented by looping through all the rows and columns in the matrix, and set them all to false with set()
 
 ## Post-Assignment
 
